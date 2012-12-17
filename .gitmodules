@@ -1,0 +1,3 @@
+[submodule "wp-plugins/wp-json-api"]
+	path = wp-plugins/wp-json-api
+	url = git@github.com:jbergen/wp-json-api.git
