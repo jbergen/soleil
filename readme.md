@@ -14,8 +14,8 @@ Sidecar relies on some amazing open source projects that you will need to have i
 ### theme
 
 * download the theme(repository) and upload to your wordpress theme folder
-** `git clone git@github.com:jbergen/sidecar.git`
-** `git submodule update --init --recursive`
+  `git clone git@github.com:jbergen/sidecar.git`
+  `git submodule update --init --recursive`
 * move the `wp-json-api` folder WordPress' `plugins` folder
 * activate the plugin and the theme in your admin dashboard
 
