@@ -3,11 +3,11 @@ define([
   "app",
 
   // Modules.
-  "modules/example"
+  "modules/main-view"
 
 ],
 
-function(app, Example) {
+function( app, MainView ) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -23,7 +23,7 @@ function(app, Example) {
       });
 
       // Insert the tutorial into the layout.
-      layout.insertView(new Example.Views.Tutorial());
+      layout.insertView( new MainView() );
       
       // Render the layout into the DOM.
       layout.render();

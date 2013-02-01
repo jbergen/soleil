@@ -6,7 +6,7 @@ define([
   // creation.
   var app = {
     // The root path to run the application.
-    root: "/",
+    root: "/soleil/",
     // the root path for the js folder in the WP sidecar theme. Defined in header.php
     jsRoot: localStorage.getItem("jsRoot")
   };

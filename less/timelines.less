@@ -1,0 +1,46 @@
+#scene-timeline {
+
+    height: 20px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+
+    &>div {
+        height: 100%;
+    }
+
+    .scene-elapsed,
+    .elapsed {
+        height: 100%;
+        position: absolute;
+        width: 0;
+        background: orange;
+    }
+
+    .timeline-list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        height: 100%;
+
+        &>li {
+            background: #ddd;
+            height: 100%;
+            float: left;
+            margin-right: 1px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &>a {
+                display: inline-block;
+                background: transparent;
+                height: 100%;
+                width: 100%;
+                position: relative;
+            }
+        }
+    }
+
+}

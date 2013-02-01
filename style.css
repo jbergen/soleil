@@ -2,8 +2,8 @@
 
 
 
-  THEME NAME: Sidecar
-  DESCRIPTION: Boilerplate Backbone.js powered Theme
+  THEME NAME: Soliel
+  DESCRIPTION: Boilerplate Backbone.js powered Sans Soleil viewer
   VERSION: 0.1
   AUTHOR: <a href="http://www.josephbergen.com/">Joseph Bergen</a>
   AUTHOR URI: http://www.josephbergen.com
@@ -694,4 +694,50 @@ textarea {
   h3 {
     page-break-after: avoid;
   }
+}
+#vid {
+  background: black;
+  width: 400px;
+  height: 250px;
+  margin: 0 auto;
+  position: fixed;
+  right: 0;
+}
+#scene-timeline {
+  height: 20px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+#scene-timeline > div {
+  height: 100%;
+}
+#scene-timeline .scene-elapsed,
+#scene-timeline .elapsed {
+  height: 100%;
+  position: absolute;
+  width: 0;
+  background: orange;
+}
+#scene-timeline .timeline-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  height: 100%;
+}
+#scene-timeline .timeline-list > li {
+  background: #ddd;
+  height: 100%;
+  float: left;
+  margin-right: 1px;
+}
+#scene-timeline .timeline-list > li:last-child {
+  margin-right: 0;
+}
+#scene-timeline .timeline-list > li > a {
+  display: inline-block;
+  background: transparent;
+  height: 100%;
+  width: 100%;
+  position: relative;
 }

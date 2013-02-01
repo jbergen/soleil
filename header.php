@@ -44,6 +44,3 @@
 </head>
 
 <body <?php body_class(); ?>>
-<div id="page" class="hfeed">
-
-  <div id="main">
