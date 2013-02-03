@@ -28,7 +28,7 @@
     localStorage.setItem("jsRoot", "<?php echo $baseURL ?>/js/");
   </script>
 
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmBSTthgVOcDGME2lS3Bjm4Fk5ItecKuQ&sensor=false"></script>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?&sensor=false"></script>
 
 
 <!-- development -->
