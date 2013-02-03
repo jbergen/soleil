@@ -28,6 +28,8 @@ function( app, SceneCollection, SceneView, ScenesTimeline ) {
     },
 
     onSearch: function( query ) {
+      this.$("#vid").attr("class","");
+      this.$(".scene-title").show();
       this.scenes.query = query;
       this.scenes.index = 0;
       this.scenes.fetch().success(function() {
