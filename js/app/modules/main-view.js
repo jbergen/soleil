@@ -19,6 +19,10 @@ function( app, SceneCollection, SceneView, ScenesTimeline ) {
       this.scenes = new SceneCollection();
     },
 
+    serialize: function() {
+      return { bgId: "bg-" + Math.floor( Math.random() * 14 ) }
+    },
+
     afterRender: function() {
       this.initMap();
     },
