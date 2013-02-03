@@ -1,8 +1,56 @@
 #vid {
     background: black;
-    width: 400px;
-    height: 250px;
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
     position: fixed;
     right: 0;
+}
+
+#form {
+    position: absolute;
+    font-family: "Helvetica", sans-serif;
+    z-index: 1000;
+    width: 100%;
+    padding: 10px;
+
+    .search-icon {
+        display: inline-block;
+        float: left;
+
+        img {
+            width: 38px;
+        }
+    }
+
+    .search {
+        background: transparent;
+        color: white;
+        border: none;
+        font-size: 2em;
+        padding-left: 10px;
+        float: left;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.scene-title {
+    color: white;
+    z-index: 12;
+    position: absolute;
+    bottom: 80px;
+    left: 11px;
+    font-size: 1.2em;
+    opacity: 0.75;
+    font-weight: lighter;
+}
+
+.transition ( @property, @time ) {
+    transition: @property @time;
+    -moz-transition: @property @time; /* Firefox 4 */
+    -webkit-transition: @property @time; /* Safari and Chrome */
+    -o-transition: @property @time; /* Opera */
 }

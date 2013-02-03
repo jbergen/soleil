@@ -697,14 +697,49 @@ textarea {
 }
 #vid {
   background: black;
-  width: 400px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   position: fixed;
   right: 0;
 }
+#form {
+  position: absolute;
+  font-family: "Helvetica", sans-serif;
+  z-index: 1000;
+  width: 100%;
+  padding: 10px;
+}
+#form .search-icon {
+  display: inline-block;
+  float: left;
+}
+#form .search-icon img {
+  width: 38px;
+}
+#form .search {
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 2em;
+  padding-left: 10px;
+  float: left;
+}
+#form .search:focus {
+  outline: none;
+}
+.scene-title {
+  color: white;
+  z-index: 12;
+  position: absolute;
+  bottom: 80px;
+  left: 11px;
+  font-size: 1.2em;
+  opacity: 0.75;
+  font-weight: lighter;
+}
 #scene-timeline {
-  height: 20px;
+  height: 70px;
   width: 100%;
   position: fixed;
   bottom: 0;
@@ -712,32 +747,53 @@ textarea {
 #scene-timeline > div {
   height: 100%;
 }
-#scene-timeline .scene-elapsed,
-#scene-timeline .elapsed {
+#scene-timeline .timestamp {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  color: red;
+  z-index: 100;
+  text-shadow: 1px 1px 1px black;
+  pointer-events: none;
+  vertical-align: middle;
+  text-align: center;
+}
+#scene-timeline .timeline-wrapper {
+  height: 50%;
+}
+#scene-timeline .scene-elapsed {
   height: 100%;
   position: absolute;
   width: 0;
-  background: orange;
+  background: red;
 }
-#scene-timeline .timeline-list {
+#scene-timeline .scene-elapsed:hover {
+  background: yellow;
+}
+#scene-timeline .timeline-wrapper {
+  position: relative;
+}
+#scene-timeline .timeline-wrapper .timeline-list {
   padding: 0;
   margin: 0;
   list-style: none;
   height: 100%;
+  overflow: hidden;
 }
-#scene-timeline .timeline-list > li {
-  background: #ddd;
+#scene-timeline .timeline-wrapper .timeline-list > li {
+  background: #fff;
   height: 100%;
   float: left;
-  margin-right: 1px;
+  position: relative;
+  min-width: 1px;
 }
-#scene-timeline .timeline-list > li:last-child {
-  margin-right: 0;
+#scene-timeline .timeline-wrapper .timeline-list > li:hover {
+  background: #aaa;
 }
-#scene-timeline .timeline-list > li > a {
+#scene-timeline .timeline-wrapper .timeline-list > li > a {
   display: inline-block;
   background: transparent;
   height: 100%;
   width: 100%;
-  position: relative;
+  position: absolute;
 }

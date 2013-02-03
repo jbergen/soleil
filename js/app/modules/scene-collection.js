@@ -19,14 +19,16 @@ function( app, SceneView, SceneModel, FilmTimeline ) {
 
   return Backbone.Collection.extend({
 
+    scene: null,
+    query: "tokyo",
     duration: 0,
     index: 0,
+    previous: null,
     cueNext: null,
     model: SceneModel,
 
     url: function() {
-      return "?json=get_tag_posts&tag_slug=test1&custom_fields=cueIn,cueOut,info,notes,sound,temporalContext";
-      return "?json=get_recent_posts&order=ASC&custom_fields=cueIn,cueOut,info,notes,sound,temporalContext";
+      return "?json=get_search_results&search=" + this.query + "&custom_fields=cueIn,cueOut,info,notes,sound,temporalContext";
     },
 
     parse: function( response ) {
@@ -46,27 +48,10 @@ function( app, SceneView, SceneModel, FilmTimeline ) {
         duration += scene.get("duration");
       });
       this.duration = duration;
-
-      console.log(this.duration);
     },
 
     comparator: function( scene ) {
       return scene.get("custom_fields").cueIn[0];
-    },
-
-    initialize: function() {
-      var _initPlay = function() {
-        this._listen();
-        // autoplay junk
-        app.soleil.on("canplaythrough", function() {
-          _.delay(function() {
-            app.soleil.play();
-            this.goToScene( this.index );
-          }.bind( this ), 1000 );
-        }.bind( this ));
-      }
-
-      this.initPlay = _.once( _initPlay );
     },
 
     _listen: function() {
@@ -76,24 +61,46 @@ function( app, SceneView, SceneModel, FilmTimeline ) {
     },
 
     play: function() {
-      this.initPlay();
+      if ( !app.initialized ) {
+        this._listen();
+        // autoplay junk
+        app.soleil.on("canplaythrough", function() {
+          _.delay(function() {
+            app.soleil.play();
+            this.goToScene( this.index );
+          }.bind( this ), 1000 );
+        }.bind( this ));
+        app.initialized = true;
+      } else {
+        this.goToScene( this.index );
+      }
     },
 
     playScene: function( scene ) {
+      this.previous = this.index;
       this.index = this.indexOf( scene );
       this.goToScene( this.index );
     },
 
     goToScene: function( index ) {
-      var scene = this.at( index );
+      var adjacent;
 
-      this.cueNext = this.length > index ? scene.get("cueOut") : null;
+      if ( this.scene ) {
+        this.scene.deactivate();
+      }
 
-      if ( this.cueNext !== null ) {
-        app.soleil.currentTime( scene.get("cueIn") );
-        app.soleil.play();
+      if ( index < this.length ) {
+        this.scene = this.at( index );
+        adjacent = index > 0 && this.scene.get("cueIn") == this.at( this.previous ).get("cueOut");
+
+        this.scene.activate();
+
+        this.cueNext = this.length > index ? this.scene.get("cueOut") : null;
+        if ( this.cueNext !== null && !adjacent ) {
+          app.soleil.currentTime( this.scene.get("cueIn") );
+          app.soleil.play();
+        }
       } else {
-        // pause if the collection ends
         app.soleil.pause();
         this.index = 0;
       }
@@ -104,6 +111,7 @@ function( app, SceneView, SceneModel, FilmTimeline ) {
         var currentTime = app.soleil.currentTime();
         
         if ( currentTime >= this.cueNext ) {
+          this.previous = this.index;
           ++this.index;
           this.goToScene( this.index );
         }

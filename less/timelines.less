@@ -1,6 +1,6 @@
 #scene-timeline {
 
-    height: 20px;
+    height: 70px;
     width: 100%;
     position: fixed;
     bottom: 0;
@@ -9,36 +9,62 @@
         height: 100%;
     }
 
-    .scene-elapsed,
-    .elapsed {
+    .timestamp {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        color: red;
+        z-index: 100;
+        text-shadow: 1px 1px 1px black;
+        pointer-events: none;
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    .timeline-wrapper {
+        height: 50%;
+    }
+
+    .scene-elapsed {
         height: 100%;
         position: absolute;
         width: 0;
-        background: orange;
+        background: red;
+
+        &:hover {
+            background: yellow;
+        }
     }
 
-    .timeline-list {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        height: 100%;
+    .timeline-wrapper {
 
-        &>li {
-            background: #ddd;
+        position: relative;
+
+        .timeline-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
             height: 100%;
-            float: left;
-            margin-right: 1px;
+            overflow: hidden;
 
-            &:last-child {
-                margin-right: 0;
-            }
-
-            &>a {
-                display: inline-block;
-                background: transparent;
+            &>li {
+                background: #fff;
                 height: 100%;
-                width: 100%;
+                float: left;
                 position: relative;
+                min-width: 1px;
+
+                &:hover {
+                    background: #aaa;
+                }
+
+                &>a {
+                    display: inline-block;
+                    background: transparent;
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                }
             }
         }
     }

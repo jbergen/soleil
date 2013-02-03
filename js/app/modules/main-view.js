@@ -15,71 +15,51 @@ function( app, SceneCollection, SceneView, ScenesTimeline ) {
 
     template: "main",
 
-    videos: [
-      {
-        url: "http://www.youtube.com/watch?v=RbRso7bLJ30",
-        cueIn: 0,
-        cueOut: 897
-      },
-      {
-        url: "http://www.youtube.com/watch?v=OXDYTBo3VgA",
-        cueIn: 897,
-        cueOut: 1790
-      },
-      {
-        url: "http://www.youtube.com/watch?v=_ezGu3FBhTg",
-        cueIn: 1790,
-        cueOut: 2654
-      },
-      {
-        url: "http://www.youtube.com/watch?v=v8RUC55WIu4",
-        cueIn: 2654,
-        cueOut: 3550
-      },
-      {
-        url: "http://www.youtube.com/watch?v=AW6Md3w8BO0",
-        cueIn: 3550,
-        cueOut: 4447
-      },
-      {
-        url: "http://www.youtube.com/watch?v=GYTl_SrSMi0",
-        cueIn: 4447,
-        cueOut: 5344
-      },
-      {
-        url: "http://www.youtube.com/watch?v=6Op4tSQJJug",
-        cueIn: 5344,
-        cueOut: 5783
-      },
-    ],
-
     initialize: function() {
       this.scenes = new SceneCollection();
     },
 
-    afterRender: function() {
+    onSearch: function( query ) {
+      this.scenes.query = query;
+      this.scenes.index = 0;
       this.scenes.fetch().success(function() {
         this.scenes.setCollectionDuration();
         this.onScenesLoad();
       }.bind( this ));
-
-      this.initPlayer();
     },
 
     onScenesLoad: function() {
-      console.log(this.scenes);
-      this.scenes.render();
+      this.initPlayer();
 
+      this.scenes.render();
       this.scenesTimeline = new ScenesTimeline({ collection: this.scenes });
       this.$("#scene-timeline").html( this.scenesTimeline.el );
       this.scenesTimeline.render();
 
     },
 
+    events: {
+      "keypress .search": "onSearchKeypress",
+      "click .search-icon": "onClickSearch"
+    },
+
+    onClickSearch: function() {
+      this.$(".search").focus();
+    },
+
+    onSearchKeypress: function( e ) {
+      if ( e.which == 13 ) {
+        this.onSearch( this.$(".search").val() );
+        this.$(".search").blur();
+      }
+    },
+
     initPlayer: function() {
-      app.soleil = Popcorn.youtube(
-        "#vid",
-        "http://www.youtube.com/watch?v=RbRso7bLJ30" );
+      if ( !app.soleil ) {
+        app.soleil = Popcorn.youtube(
+          "#vid",
+          "http://www.youtube.com/watch?v=3OlOsfa4Ol4" );
+      }
 
       this.scenes.play();
     }
