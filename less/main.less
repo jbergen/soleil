@@ -7,6 +7,23 @@
     right: 0;
 }
 
+#map {
+    position: absolute;
+    height: 200px;
+    width: 400px;
+    background: white;
+    z-index: 10;
+    bottom: 110px;
+    opacity: .5;
+    left: -400px;
+    .transition( left, 1s );
+
+    &.active {
+        left:0;
+        .transition( left, .5s );
+    }
+}
+
 #form {
     position: absolute;
     font-family: "Helvetica", sans-serif;

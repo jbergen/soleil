@@ -703,6 +703,39 @@ textarea {
   position: fixed;
   right: 0;
 }
+#map {
+  position: absolute;
+  height: 200px;
+  width: 400px;
+  background: white;
+  z-index: 10;
+  bottom: 110px;
+  opacity: .5;
+  left: -400px;
+  transition: left 1s;
+  -moz-transition: left 1s;
+  /* Firefox 4 */
+
+  -webkit-transition: left 1s;
+  /* Safari and Chrome */
+
+  -o-transition: left 1s;
+  /* Opera */
+
+}
+#map.active {
+  left: 0;
+  transition: left 0.5s;
+  -moz-transition: left 0.5s;
+  /* Firefox 4 */
+
+  -webkit-transition: left 0.5s;
+  /* Safari and Chrome */
+
+  -o-transition: left 0.5s;
+  /* Opera */
+
+}
 #form {
   position: absolute;
   font-family: "Helvetica", sans-serif;

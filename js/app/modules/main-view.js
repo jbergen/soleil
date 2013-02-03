@@ -19,6 +19,10 @@ function( app, SceneCollection, SceneView, ScenesTimeline ) {
       this.scenes = new SceneCollection();
     },
 
+    afterRender: function() {
+      this.initMap();
+    },
+
     onSearch: function( query ) {
       this.scenes.query = query;
       this.scenes.index = 0;
@@ -62,6 +66,16 @@ function( app, SceneCollection, SceneView, ScenesTimeline ) {
       }
 
       this.scenes.play();
+    },
+
+    initMap: function() {
+      var mapOptions = {
+        center: new google.maps.LatLng( 0, 0 ),
+        zoom: 8,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+      };
+      app.geocoder = geocoder = new google.maps.Geocoder();
+      app.map = new google.maps.Map( this.$("#map")[0], mapOptions);
     }
 
   });

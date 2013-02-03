@@ -35,6 +35,7 @@ function( app ) {
 
     activate: function() {
       this.updateTitle();
+      this.updateMap();
       app.soleil.on("timeupdate", function() {
         this.updateTimestamp();
       }.bind( this ));
@@ -56,6 +57,31 @@ function( app ) {
       var t = app.soleil.currentTime() - this.get("cueIn");
 
       $(".scene-title .time-elapsed").html( this.toHMS( t ) );
+    },
+
+    updateMap: function() {
+      if ( this.get('custom_fields').lat ) {
+        var pos = new google.maps.LatLng( this.get('custom_fields').lat[0], this.get('custom_fields').lng[0] );
+        
+        app.map.setCenter( pos );
+        console.log("ZOOOM", this.get('custom_fields').zoom[0], parseInt( this.get('custom_fields').zoom[0], 10 ) );
+        app.map.setZoom( parseInt( this.get('custom_fields').zoom[0], 10 ) || 9 );
+        $("#map").addClass("active");
+      } else if ( this.get('custom_fields').location ) {
+        var address = this.get('custom_fields').location[0];
+
+        geocoder.geocode( { 'address': address}, function( results, status ) {
+          if ( status == google.maps.GeocoderStatus.OK ) {
+            app.map.setCenter(results[0].geometry.location);
+            app.map.setZoom( parseInt( this.get('custom_fields').zoom[0], 10 ) || 9 );
+            $("#map").addClass("active");
+          } else {
+            // alert('Geocode was not successful for the following reason: ' + status);
+          }
+        }.bind( this ));
+      } else {
+        $("#map").removeClass("active");
+      }
     },
 
     toHMS: function( sec ) {
