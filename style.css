@@ -915,7 +915,7 @@ textarea {
   width: 0;
   background: red;
 }
-#scene-timeline .scene-elapsed:hover {
+#scene-timeline .scene-elapsed.hover {
   background: yellow;
 }
 #scene-timeline .timeline-wrapper {
@@ -935,7 +935,7 @@ textarea {
   position: relative;
   min-width: 1px;
 }
-#scene-timeline .timeline-wrapper .timeline-list > li:hover {
+#scene-timeline .timeline-wrapper .timeline-list > li.hover {
   background: #aaa;
 }
 #scene-timeline .timeline-wrapper .timeline-list > li > a {

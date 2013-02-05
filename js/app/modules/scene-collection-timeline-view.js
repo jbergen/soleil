@@ -15,6 +15,9 @@ function( app ) {
           this.onTimeupdate();
         }
       }.bind( this ));
+
+      this.model.on("mouseenter", this.onRemoteEnter, this );
+      this.model.on("mouseleave", this.onRemoteLeave, this );
     },
 
     serialize: function() {
@@ -32,11 +35,30 @@ function( app ) {
     },
 
     events: {
-      "click .go-to-scene": "goToScene"
+      "click .go-to-scene": "goToScene",
+      "mouseenter": "onMouseenter",
+      "mouseleave": "onMouseleave"
     },
 
     goToScene: function() {
       this.model.collection.playScene( this.model );
+    },
+
+    onMouseenter: function() {
+      this.model.trigger("mouseenter");
+    },
+
+    onMouseleave: function() {
+      this.model.trigger("mouseleave");
+    },
+
+    onRemoteLeave: function() {
+      this.$el.removeClass("hover");
+      this.$(".scene-elapsed").removeClass("hover");
+    },
+    onRemoteEnter: function() {
+      this.$el.addClass("hover");
+      this.$(".scene-elapsed").addClass("hover");
     }
 
   });
