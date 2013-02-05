@@ -85,7 +85,7 @@ function( app, SceneCollectionView, SceneFilmView ) {
       var h,m,s;
 
       h = parseInt( sec / 3600, 10 );
-      m = parseInt( sec / 60, 10 );
+      m = parseInt( ( sec / 60 ) % 60, 10 );
       s = parseInt( sec % 60, 10 );
       h = h < 10 ? "0" + h : h;
       m = m < 10 ? "0" + m : m;

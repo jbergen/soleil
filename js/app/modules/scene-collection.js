@@ -28,8 +28,9 @@ function( app, SceneView, SceneModel, FilmTimeline ) {
     model: SceneModel,
 
     url: function() {
-      return "?json=get_tag_posts&tag_slug=test1&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
-      return "?json=get_search_results&search=" + this.query + "&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
+      return "?json=get_tag_posts&tag_slug="+ this.query +"&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
+      // return "?json=get_tag_posts&tag_slug=test1&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
+      // return "?json=get_search_results&search=" + this.query + "&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
     },
 
     parse: function( response ) {
