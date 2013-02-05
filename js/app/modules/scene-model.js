@@ -60,14 +60,14 @@ function( app ) {
     },
 
     updateMap: function() {
-      if ( this.get('custom_fields').lat ) {
+      if ( this.get('custom_fields').lat.length ) {
         var pos = new google.maps.LatLng( this.get('custom_fields').lat[0], this.get('custom_fields').lng[0] );
         
         app.map.setCenter( pos );
         console.log("ZOOOM", this.get('custom_fields').zoom[0], parseInt( this.get('custom_fields').zoom[0], 10 ) );
         app.map.setZoom( parseInt( this.get('custom_fields').zoom[0], 10 ) || 9 );
         $("#map").addClass("active");
-      } else if ( this.get('custom_fields').location ) {
+      } else if ( this.get('custom_fields').location.length ) {
         var address = this.get('custom_fields').location[0];
 
         geocoder.geocode( { 'address': address}, function( results, status ) {
