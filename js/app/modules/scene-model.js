@@ -36,6 +36,7 @@ function( app ) {
     activate: function() {
       this.updateTitle();
       this.updateMap();
+      this.updateCaption();
       app.soleil.on("timeupdate", function() {
         this.updateTimestamp();
       }.bind( this ));
@@ -59,14 +60,18 @@ function( app ) {
       $(".scene-title .time-elapsed").html( this.toHMS( t ) );
     },
 
+    updateCaption: function() {
+      $("#captions").html( this.get("content") );
+    },
+
     updateMap: function() {
-      if ( this.get('custom_fields').lat[0].length ) {
+      if ( this.get("custom_fields").lat && this.get('custom_fields').lat[0].length ) {
         var pos = new google.maps.LatLng( this.get('custom_fields').lat[0], this.get('custom_fields').lng[0] );
         
         app.map.setCenter( pos );
         app.map.setZoom( parseInt( this.get('custom_fields').zoom[0], 10 ) || 9 );
         $("#map").addClass("active");
-      } else if ( this.get('custom_fields').location[0].length ) {
+      } else if ( this.get('custom_fields').location && this.get('custom_fields').location[0].length ) {
         var address = this.get('custom_fields').location[0];
 
         geocoder.geocode( { 'address': address}, function( results, status ) {
