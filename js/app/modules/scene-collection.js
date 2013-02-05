@@ -28,7 +28,16 @@ function( app, SceneView, SceneModel, FilmTimeline ) {
     model: SceneModel,
 
     url: function() {
-      return "?json=get_tag_posts&tag_slug="+ this.query +"&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
+      var q = this.query.split(":");
+
+      // default tag search
+      if ( q.length == 1 || q[0] == "tag" ) {
+        return "?json=get_tag_posts&tag_slug="+ this.query +"&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
+      } else if ( q[0] == "all" ) {
+        $(".search").val( q[1] );
+        return "?json=get_search_results&search="+ q[1] +"&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
+      }
+
       // return "?json=get_tag_posts&tag_slug=test1&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
       // return "?json=get_search_results&search=" + this.query + "&custom_fields=zoom,lat,lng,location,cueIn,cueOut,info,notes,sound,temporalContext";
     },
